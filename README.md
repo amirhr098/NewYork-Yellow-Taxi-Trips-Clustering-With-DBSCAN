@@ -1,4 +1,4 @@
-# NewYork-Yellow-Taxi-Trips-Clustering-With-DBSCAN
+# NewYork Yellow Taxi Trips Clustering With DBSCAN
 
 In this project I try to cluster the NY taxi data sets by SciKit Learn DBSCAN and finding the best value of 'eps' and 'min_samples' by Silhouette Score
 
