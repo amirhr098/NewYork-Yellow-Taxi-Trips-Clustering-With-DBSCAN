@@ -1,176 +1,38 @@
-# NewYork Yellow Taxi Trips Clustering With DBSCAN
+# NewYork Yellow Taxi Trip Duration & Distance Clustering Project
 
-In this project I try to cluster the NY taxi data sets by SciKit Learn DBSCAN and finding the best value of 'eps' and 'min_samples' by Silhouette Score
+
+This project utilizes DBSCAN clustering algorithm from scikit-learn library to cluster the trip duration and distance data.
+
 
 Original Data: https://www.kaggle.com/c/nyc-taxi-trip-duration (Only used 'train.csv'.)
 
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Best-Parameters"><strong>Best Parameters</strong><a class="anchor-link" href="#Best-Parameters"></a></h1>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dbscan</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="mf">1.95</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
-<span class="n">dbscan</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-</pre></div>
+
+The data is read from a csv file and then two columns, "trip_duration" and "distance", are extracted and used as the feature set for clustering. The script then loops over different values of "eps" and "min_samples" hyperparameters to determine the best combination that results in maximum calinski harabasz score.
+
+## Requirements
+     
++ Pandas
+     
++ Numpy
+     
++ Sklearn
+     
+## Data
+
+The data contains 1458644 rows and 11 columns with information such as pickup and dropoff times, passenger count, pickup and dropoff locations, and trip duration.
 
 
-</div>
-</div>
-</div>
+## Feature Extraction
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+The "distance" feature is calculated as the Euclidean distance between the pickup and dropoff locations.
 
 
+## DBSCAN Clustering
 
-<div class="jp-OutputArea jp-Cell-outputArea">
+DBSCAN is run with "eps" and "min_samples" hyperparameters, the values of which are looped over to determine the best combination. The "eps" parameter controls the maximum distance between two samples for them to be considered as part of the same neighborhood, while "min_samples" sets the minimum number of samples required to form a dense region.
 
-<div class="jp-OutputArea-child">
+The best parameters found for DBSCAN in this script are eps = 1.95 and min_samples = 300, with a calinski harabasz score of 2745.44.
 
-    
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>DBSCAN(eps=1.95, min_samples=300)</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">calinski_harabasz_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dbscan</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span>
-</pre></div>
-
-
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>2745.4420020496927</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">dbscan</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span>
-</pre></div>
-
-
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>array([-1,  0,  1,  2,  3,  4,  5])</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dbscan</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
-</pre></div>
-
-
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
 <pre>{'algorithm': 'auto',
  'eps': 1.95,
  'leaf_size': 30,
@@ -179,17 +41,13 @@ Original Data: https://www.kaggle.com/c/nyc-taxi-trip-duration (Only used 'train
  'min_samples': 300,
  'n_jobs': None,
  'p': None}</pre>
-</div>
+ 
+## Results
 
-</div>
+The results of the script are the best combination of hyperparameters that result in maximum calinski harabasz score. This score is a measure of the quality of clustering and the higher the score, the better the clustering.
 
-</div>
 
-</div>
-
-</div>
-
-# Help
+## Help
   
 Feel free to send better clustering value for me:)
 
